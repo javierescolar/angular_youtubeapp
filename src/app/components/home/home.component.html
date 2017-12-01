@@ -1,0 +1,43 @@
+<h1>Canal de Youtube</h1>
+<hr>
+<div class="card-columns" *ngIf="videos.length > 0">
+
+  <div class="card" *ngFor="let video of videos">
+    <img class="card-img-top img-fluid" [src]="video.thumbnails.high.url" alt="Card image cap">
+    <div class="card-block">
+      <h5 class="card-title">{{video.title}}</h5>
+      <button class="btn btn-outline-danger"
+              (click)=verVideo(video)>
+        Ver video
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<button class="btn btn-block btn-outline-primary"
+        (click)="verMasVideos()">
+  Ver más Videos
+</button>
+
+<div class="modal fade" id="myModal"
+tabindex="-1" role="dialog"
+aria-labelledby="exampleModalLabel"
+aria-hidden="true"
+data-backdrop="static">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" *ngIf="videoSeleccionado">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{videoSeleccionado.title}}</h5>
+      </div>
+      <div class="modal-body">
+        <iframe width="100%" height="315" [src]="videoSeleccionado.resourceId.videoId | videoyoutube">
+          <p>Your browser does not support iframes.</p>
+        </iframe>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="cerraModal()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
